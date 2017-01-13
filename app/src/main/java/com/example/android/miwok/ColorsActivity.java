@@ -1,7 +1,5 @@
 package com.example.android.miwok;
 
-import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +14,8 @@ public class ColorsActivity extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
 //для управления аудио фокусом
-    private AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-    private AudioManager.OnAudioFocusChangeListener afChangeListener;
+//    private AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+//    private AudioManager.OnAudioFocusChangeListener afChangeListener;
 //    Для реализации интерфейса отвечающего за отслеживание окончания проигрывания файла
     private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
@@ -59,21 +57,21 @@ public class ColorsActivity extends AppCompatActivity {
                     releaseMediaPlayer();
 //                    запрашиваем аудиофокус
                     // Request audio focus for playback
-                    int result = am.requestAudioFocus(afChangeListener,
+//                    int result = am.requestAudioFocus(afChangeListener,
                             // Use the music stream.
-                            AudioManager.STREAM_MUSIC,
+//                            AudioManager.STREAM_MUSIC,
                             // Request permanent focus.
-                            AudioManager.AUDIOFOCUS_GAIN);
+//                            AudioManager.AUDIOFOCUS_GAIN);
 
-                    if (result == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT) {
+//                    if (result == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT) {
                         // Start playback
                         mMediaPlayer = MediaPlayer.create(ColorsActivity.this, words.get(position).getmAudioResourceId());
                         mMediaPlayer.start();
                         //                Очищаем память занимамую объектами медиа плеера при наступлении события окончания проигрывания файла
                         mMediaPlayer.setOnCompletionListener(mCompletionListener);
                         // Abandon audio focus when playback complete
-                        am.abandonAudioFocus(afChangeListener);
-                    }
+//                        am.abandonAudioFocus(afChangeListener);
+//                    }
                 }
                 else{
                     Toast.makeText(ColorsActivity.this, "No audio file", Toast.LENGTH_SHORT).show();
@@ -89,7 +87,7 @@ public class ColorsActivity extends AppCompatActivity {
         super.onStop();
         releaseMediaPlayer();
         // Abandon audio focus when playback complete
-        am.abandonAudioFocus(afChangeListener);
+//        am.abandonAudioFocus(afChangeListener);
     }
     /**
      * Clean up the media player by releasing its resources.
